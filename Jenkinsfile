@@ -1,13 +1,9 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:16.13.1-alpine'
-            args '-p 3000:3000'
-        }
+    agent any
+    tools{
+    nodejs '18.6.0'
     }
-    environment {
-        CI = 'true'
-    }
+ 
     stages {
         stage('Build') {
             steps {
