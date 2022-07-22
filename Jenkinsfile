@@ -1,14 +1,20 @@
 pipeline {
-    agent any
-    tools{
-    nodejs '18.6.0'
-    }
- 
+    agent {label "linux"}
     stages {
-        stage('Build') {
+        stage("Build") {
             steps {
-                sh 'npm install'
+                """
+                docker build -t testapi .   
+                """
+
             }
+        }
+        stage("run"){
+        steps{
+        sh """
+         docker run -p 9090:9090 -d testapi    
+        """
+        }
         }
        
 
